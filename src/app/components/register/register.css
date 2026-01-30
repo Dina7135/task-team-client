@@ -4,46 +4,93 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 80px);
-  background-color: var(--background);
-  padding: var(--space-4);
+  padding: var(--space-5);
   direction: rtl;
+  position: relative;
+  z-index: 1;
 }
 
 /* Register Card */
 .register-card {
   background: var(--card-bg);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(20px);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-xl), var(--glow-lg);
   width: 100%;
-  max-width: 450px; /* Slightly wider for more fields */
-  animation: fadeIn 0.4s ease-out;
+  max-width: 520px;
+  animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Note: h2, .subtitle, .form-group, and label styles are inherited from login.css and global styles */
+.register-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--glow-secondary) 60deg,
+    transparent 120deg
+  );
+  animation: cardRotate 8s linear infinite;
+  opacity: 0.3;
+}
+
+.register-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  z-index: -1;
+}
+
+@keyframes cardEntry {
+  from { opacity: 0; transform: translateY(50px) scale(0.8); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 /* Full-width button specific to the register form */
 .register-btn {
   width: 100%;
   margin-top: var(--space-3);
+  padding: var(--space-4);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  background: var(--gradient-secondary);
 }
 
 /* Footer Links */
 .footer-links {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   text-align: center;
   font-size: var(--font-size-sm);
 }
 
 .footer-links a {
-  color: var(--primary);
-  font-weight: 500;
+  color: var(--secondary);
+  font-weight: 700;
   text-decoration: none;
+  transition: all var(--transition-normal);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
 }
 
 .footer-links a:hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
+  background: rgba(6, 182, 212, 0.15);
+  text-shadow: 0 0 10px var(--glow-secondary);
 }
 
 /* Error Message Styling */
@@ -51,6 +98,18 @@
   color: var(--error);
   font-size: var(--font-size-sm);
   margin-top: var(--space-2);
-  min-height: 20px;
+  min-height: 24px;
   text-align: center;
+  font-weight: 600;
+  padding: var(--space-2);
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
 }

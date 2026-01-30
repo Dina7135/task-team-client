@@ -1,11 +1,22 @@
 .main-header {
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(124, 58, 237, 0.2);
   padding: 0 2rem;
-  height: 70px;
+  height: 80px;
   display: flex;
   align-items: center;
-  direction: rtl; /* כיוון עברית */
+  direction: rtl;
+  border-bottom: 2px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .nav-container {
@@ -13,70 +24,132 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #4a90e2;
+  font-size: 1.8rem;
+  font-weight: 900;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   cursor: pointer;
+  transition: all var(--transition-normal);
+  text-shadow: 0 0 30px var(--glow-primary);
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(-2deg);
+  filter: drop-shadow(0 0 20px var(--glow-primary));
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   margin: 0;
   padding: 0;
 }
 
 .nav-links li a {
   text-decoration: none;
-  color: #555;
-  font-weight: 500;
-  transition: color 0.3s;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: var(--font-size-md);
+  transition: all var(--transition-normal);
+  position: relative;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+}
+
+.nav-links li a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width var(--transition-normal);
+}
+
+.nav-links li a:hover::before {
+  width: 100%;
 }
 
 .nav-links li a:hover, .active {
-  color: #4a90e2 !important;
+  color: var(--primary) !important;
+  background: var(--card-hover);
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 /* עיצוב מיוחד לכפתור הרשמה */
 .register-btn {
-  background-color: #4a90e2;
+  background: var(--gradient-primary) !important;
   color: white !important;
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
-  transition: background 0.3s !important;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: 700;
+  transition: all var(--transition-normal) !important;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.register-btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .register-btn:hover {
-  background-color: #357abd;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-lg), var(--glow-md);
 }
 
 /* כפתור התנתקות */
 .logout-btn {
-  background: none;
-  border: 1px solid #ff4d4f;
-  color: #ff4d4f;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
+  background: transparent;
+  border: 2px solid var(--error);
+  color: var(--error);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s;
+  font-weight: 700;
+  transition: all var(--transition-normal);
 }
 
 .logout-btn:hover {
-  background-color: #ff4d4f;
+  background: var(--error);
   color: white;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  transform: translateY(-2px);
 }
 
 .user-greeting {
-  color: #777;
-  font-size: 0.9rem;
-  border-left: 1px solid #ddd;
-  padding-left: 1.5rem;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border-left: 2px solid var(--border-color);
+  padding-left: var(--space-4);
+  background: var(--card-hover);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
 }

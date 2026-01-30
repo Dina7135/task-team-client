@@ -3,34 +3,74 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px); /* Adjust based on header height */
-  background-color: var(--background);
-  padding: var(--space-4);
+  min-height: calc(100vh - 80px);
+  padding: var(--space-5);
+  position: relative;
+  z-index: 1;
 }
 
 /* Login Card */
 .login-card {
   background: var(--card-bg);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(20px);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-xl), var(--glow-lg);
   width: 100%;
-  max-width: 420px;
+  max-width: 480px;
   text-align: right;
-  animation: fadeIn 0.4s ease-out;
+  animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Card animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--glow-primary) 60deg,
+    transparent 120deg
+  );
+  animation: cardRotate 8s linear infinite;
+  opacity: 0.3;
+}
+
+.login-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  z-index: -1;
+}
+
+@keyframes cardEntry {
+  from { opacity: 0; transform: translateY(50px) scale(0.8); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Card Title */
 h2 {
-  margin-bottom: var(--space-2);
-  color: var(--text-primary);
-  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-3);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
   text-align: center;
 }
 
@@ -40,45 +80,55 @@ h2 {
   margin-bottom: var(--space-5);
   font-size: var(--font-size-md);
   text-align: center;
+  font-weight: 500;
 }
 
 /* Form Elements */
 .form-group {
   margin-bottom: var(--space-4);
+  position: relative;
 }
 
 label {
   display: block;
   margin-bottom: var(--space-2);
-  color: var(--text-secondary);
-  font-weight: 500;
+  color: var(--text-primary);
+  font-weight: 700;
   font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
-
-/* Input and button styles are now inherited from the global styles.css */
 
 /* Full-width button specific to the login form */
 .login-btn {
   width: 100%;
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
 }
 
 /* Footer Links */
 .footer-links {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
   text-align: center;
   font-size: var(--font-size-sm);
 }
 
 .footer-links a {
   color: var(--primary);
-  font-weight: 500;
-  margin: 0 var(--space-1);
+  font-weight: 700;
+  margin: 0 var(--space-2);
   text-decoration: none;
+  transition: all var(--transition-normal);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
 }
 
 .footer-links a:hover {
   color: var(--primary-hover);
-  text-decoration: underline;
+  background: var(--card-hover);
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 /* Error Message Styling */
@@ -86,6 +136,18 @@ label {
   color: var(--error);
   font-size: var(--font-size-sm);
   margin-top: var(--space-2);
-  min-height: 20px; /* Reserve space to prevent layout shifts */
+  min-height: 24px;
   text-align: center;
+  font-weight: 600;
+  padding: var(--space-2);
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
 }
