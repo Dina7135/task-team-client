@@ -1,0 +1,49 @@
+<div class="projects-container">
+    <header class="projects-nav">
+        <button class="back-link" (click)="goBack()">← Back to Teams</button>
+        <span class="context-badge">Team #{{ teamId }}</span>
+    </header>
+
+    <main class="projects-content">
+        <h1 class="page-title">Projects</h1>
+        <button class="fab-add-btn" (click)="toggleModal()">➕ Create New Project</button>
+    </main>
+
+    @if (isModalOpen()) {
+    <div class="modal-backdrop">
+        <div class="modal-content">
+            <h2>New Project</h2>
+
+            <div class="form-field">
+                <label>Project Name</label>
+                <input [(ngModel)]="newProjectName" placeholder="Enter name..." />
+            </div>
+
+            <div class="form-field">
+                <label>Description</label>
+                <textarea [(ngModel)]="newProjectDesc" placeholder="Enter description..."></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary" (click)="toggleModal()">Cancel</button>
+                <button class="btn-primary" (click)="onCreateProject()">Create</button>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+<hr class="separator" />
+
+<div class="projects-grid">
+    @for (project of (projects$ | async); track project.id) {
+    <div class="project-card">
+        <div class="project-info">
+            <span class="project-code">[ {{ project.name }} ]</span>
+            <p class="project-description">{{ project.description }}</p>
+        </div>
+        <button class="action-link" (click)="openProject(project.id)">(Open)</button>
+    </div>
+    } @empty {
+    <div class="empty-state">No projects found for this team.</div>
+    }
+</div>

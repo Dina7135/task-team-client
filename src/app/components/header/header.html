@@ -1,0 +1,22 @@
+<header class="main-header">
+  <nav class="nav-container">
+    <div class="logo" routerLink="/">
+      MyProject
+    </div>
+
+    <ul class="nav-links">
+      <li><a routerLink="/team_dashboard" routerLinkActive="active">לצפיה</a></li>
+
+      <ng-container *ngIf="isLoggedIn$ | async; else guestActions">
+        <li class="user-greeting">שלום, {{ (user$ | async)?.name }}</li>
+        <li><a routerLink="/profile" routerLinkActive="active">אזור אישי</a></li>
+        <li><button class="logout-btn" (click)="onLogout()">התנתק</button></li>
+      </ng-container>
+
+      <ng-template #guestActions>
+        <li><a routerLink="/login" routerLinkActive="active" class="login-link">התחברות</a></li>
+        <li><a routerLink="/register" routerLinkActive="active" class="register-btn">הרשמה</a></li>
+      </ng-template>
+    </ul>
+  </nav>
+</header>

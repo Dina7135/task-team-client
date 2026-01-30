@@ -1,0 +1,73 @@
+<section class="teams-container">
+    <div class="header-row">
+        <h1 class="header-title">Your Teams</h1>
+        <button class="create-btn" (click)="toggleCreateModal()">➕ Create New Team</button>
+    </div>
+    <hr class="line-separator" />
+
+    <div class="list-container">
+        @for (team of (teams$ | async); track team.id) {
+        <div class="list-item">
+            <div class="item-details">
+                <span class="bracket-title">[ Team: {{ team.name }} ]</span>
+                <span class="secondary-text">👥 Members: {{ team.members_count || 0 }}</span>
+            </div>
+            <div class="actions">
+                <button class="inline-action add-btn" (click)="openAddMemberModal(team.id)">➕ Add Member</button>
+                <button class="inline-action open-btn" (click)="openTeam(team.id)">👁️ Open</button>
+            </div>
+        </div>
+        } @empty {
+        <p>No teams found in your account.</p>
+        }
+    </div>
+</section>
+
+@if (isCreateModalOpen()) {
+<div class="modal-overlay" (click)="toggleCreateModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+        <h3>Create New Team</h3>
+        <input 
+            [ngModel]="newTeamName()" 
+            (ngModelChange)="newTeamName.set($event)" 
+            placeholder="Enter team name" 
+            class="modal-input" 
+        />
+        <div class="modal-actions">
+            <button (click)="toggleCreateModal()" class="cancel-btn">Cancel</button>
+            <button (click)="onCreateTeam()" class="confirm-btn">Create</button>
+        </div>
+    </div>
+</div>
+}
+
+@if (isAddMemberModalOpen()) {
+<div class="modal-overlay" (click)="closeAddMemberModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+        <h3>Add Member to Team</h3>
+        
+        @if (statusMessage()) {
+        <div [class]="'status-message ' + statusType()">
+            {{ statusMessage() }}
+        </div>
+        }
+        
+        <div class="input-group">
+            <label for="userId">User ID:</label>
+            <input 
+                id="userId"
+                type="number" 
+                [ngModel]="newMemberId()" 
+                (ngModelChange)="newMemberId.set($event)" 
+                placeholder="Enter User ID" 
+                class="modal-input" 
+                min="1"
+            />
+        </div>
+        <div class="modal-actions">
+            <button (click)="closeAddMemberModal()" class="cancel-btn">Cancel</button>
+            <button (click)="onConfirmAddMember()" class="confirm-btn">Add Member</button>
+        </div>
+    </div>
+</div>
+}

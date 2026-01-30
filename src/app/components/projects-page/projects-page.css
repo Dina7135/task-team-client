@@ -1,0 +1,141 @@
+/* Page Container */
+.projects-container {
+  padding: var(--space-5) var(--space-4);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Navigation Header */
+.projects-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.back-link {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: var(--font-size-md);
+}
+
+.context-badge {
+  background: var(--card-bg);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 20px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.page-title {
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.separator {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: var(--space-4) 0;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+/* Project Card */
+.project-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border-left: 5px solid var(--primary); /* Status stripe */
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-info h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-1);
+  color: var(--text-primary);
+}
+
+.project-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* Add Project Button */
+.fab-add-btn {
+  width: 100%;
+  padding: var(--space-3);
+  border: 2px dashed var(--primary);
+  background: transparent;
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+.fab-add-btn:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Modal for Create Project */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  backdrop-filter: blur(3px);
+}
+
+.modal-content {
+  background: var(--card-bg);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.btn-secondary {
+  background: var(--background);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+}

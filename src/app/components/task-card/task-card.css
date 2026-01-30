@@ -1,0 +1,85 @@
+/* Task Card */
+.task-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-3);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border-left: 4px solid; /* Set color dynamically based on project/priority */
+  cursor: grab;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.task-card.dragging {
+  opacity: 0.5;
+  transform: rotate(3deg);
+}
+
+/* Color coding for priority */
+.task-card.priority-low { border-color: var(--success); }
+.task-card.priority-medium { border-color: #FDBA74; } /* Orange-300 */
+.task-card.priority-high { border-color: var(--error); }
+
+.task-title {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.task-info {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.task-info p {
+  margin: var(--space-1) 0;
+}
+
+.card-line {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: var(--space-3) 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+
+/* Buttons use global .btn styles */
+.btn.save-btn {
+  background-color: var(--success);
+}
+
+.btn.delete-btn {
+  background-color: var(--error);
+}
+
+/* Edit Form */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Inputs and dropdowns use global styles */
+.status-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-color);
+}
+
+.status-selector label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}

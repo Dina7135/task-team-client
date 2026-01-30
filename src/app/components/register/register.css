@@ -1,0 +1,56 @@
+/* Register Container */
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  background-color: var(--background);
+  padding: var(--space-4);
+  direction: rtl;
+}
+
+/* Register Card */
+.register-card {
+  background: var(--card-bg);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 450px; /* Slightly wider for more fields */
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Note: h2, .subtitle, .form-group, and label styles are inherited from login.css and global styles */
+
+/* Full-width button specific to the register form */
+.register-btn {
+  width: 100%;
+  margin-top: var(--space-3);
+}
+
+/* Footer Links */
+.footer-links {
+  margin-top: var(--space-4);
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.footer-links a {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: var(--error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
+  min-height: 20px;
+  text-align: center;
+}

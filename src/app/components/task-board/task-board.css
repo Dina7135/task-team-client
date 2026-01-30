@@ -1,0 +1,243 @@
+/* Board Container */
+.board-container {
+  padding: var(--space-5) var(--space-4);
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+/* Board Navigation */
+.board-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.board-title {
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+}
+
+/* Kanban Grid */
+.kanban-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+  align-items: start;
+}
+
+/* Kanban Column */
+.kanban-column {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  min-height: 75vh;
+  border-top: 4px solid;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.column-header h2 {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Column-specific border colors */
+.kanban-column.todo { border-color: #FDBA74; } /* Orange-300 */
+.kanban-column.progress { border-color: var(--primary); }
+.kanban-column.done { border-color: var(--success); }
+
+/* Task list within a column */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: calc(100% - 40px);
+  overflow-y: auto;
+}
+
+/* Modal styles are inherited from projects-page.css and global styles */
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-surface {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--font-size-lg);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.close-btn:hover {
+  background-color: var(--border-color);
+  transform: none;
+}
+
+.modal-body {
+  padding: var(--space-4);
+}
+
+.field-group {
+  margin-bottom: var(--space-3);
+}
+
+.field-group label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.field-group input,
+.field-group textarea,
+.field-group select {
+  width: 100%;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-top: 1px solid var(--border-color);
+}
+
+.cancel-action {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.cancel-action:hover {
+  background-color: var(--border-color);
+  box-shadow: none;
+  transform: none;
+}
+
+.confirm-action {
+  background-color: var(--primary);
+  color: white;
+}
+
+.confirm-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Additional button styles */
+.create-task-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+.create-task-btn:hover {
+  background-color: var(--primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.back-link {
+  background: transparent;
+  color: var(--primary);
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--primary-hover);
+  background-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Status indicators */
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicator.todo {
+  background-color: #FDBA74;
+}
+
+.indicator.progress {
+  background-color: var(--primary);
+}
+
+.indicator.done {
+  background-color: var(--success);
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

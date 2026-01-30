@@ -1,0 +1,85 @@
+<div class="board-container">
+  <header class="board-nav">
+    <div class="nav-left">
+      <button class="back-link" (click)="goBack()">← Projects</button>
+      <h1 class="board-title">Project Tasks</h1>
+    </div>
+    <button class="create-task-btn" (click)="openCreateModal()">➕ New Task</button>
+  </header>
+
+  <div class="kanban-grid">
+    <section class="kanban-column">
+      <div class="column-header">
+        <span class="indicator todo"></span>
+        <h2>To Do</h2>
+      </div>
+      <div class="cards-container">
+        @for (task of (todoTasks$ | async); track task.id) {
+          <app-task-card [task]="task" (update)="onUpdateTask($event)" (delete)="onDeleteTask($event)" (comments)="openComments($event)"></app-task-card>
+        }
+      </div>
+    </section>
+
+    <section class="kanban-column">
+      <div class="column-header">
+        <span class="indicator progress"></span>
+        <h2>In Progress</h2>
+      </div>
+      <div class="cards-container">
+        @for (task of (inProgressTasks$ | async); track task.id) {
+          <app-task-card [task]="task" (update)="onUpdateTask($event)" (delete)="onDeleteTask($event)" (comments)="openComments($event)"></app-task-card>
+        }
+      </div>
+    </section>
+
+    <section class="kanban-column">
+      <div class="column-header">
+        <span class="indicator done"></span>
+        <h2>Done</h2>
+      </div>
+      <div class="cards-container">
+        @for (task of (doneTasks$ | async); track task.id) {
+          <app-task-card [task]="task" (update)="onUpdateTask($event)" (delete)="onDeleteTask($event)" (comments)="openComments($event)"></app-task-card>
+        }
+      </div>
+    </section>
+  </div>
+
+  @if (showCreateModal()) {
+    <div class="modal-overlay">
+      <div class="modal-surface">
+        <header class="modal-header">
+          <h3>Create Task</h3>
+          <button class="close-btn" (click)="showCreateModal.set(false)">×</button>
+        </header>
+
+        <div class="modal-body">
+          <div class="field-group">
+            <label>Task Title</label>
+            <input [(ngModel)]="newTask.title" placeholder="Enter title..." />
+          </div>
+          <div class="field-group">
+            <label>Assignee ID</label>
+            <input type="number" [(ngModel)]="newTask.assigneeId" placeholder="Team member ID" />
+          </div>
+          <div class="field-group">
+            <label>Due Date</label>
+            <input type="date" [(ngModel)]="newTask.dueDate" />
+          </div>
+        </div>
+
+        <footer class="modal-footer">
+          <button class="cancel-action" (click)="showCreateModal.set(false)">Cancel</button>
+          <button class="confirm-action" (click)="onCreateTask()" [disabled]="!newTask.title">Create</button>
+        </footer>
+      </div>
+    </div>
+  }
+
+  @if (selectedTaskId(); as id) {
+  <app-task-comments 
+    [taskId]="id" 
+    (close)="closeComments()">
+  </app-task-comments>
+}
+</div>

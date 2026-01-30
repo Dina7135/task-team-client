@@ -1,0 +1,43 @@
+<div class="task-card" [class.editing]="isEditing()">
+  <div class="card-body">
+    @if (!isEditing()) {
+      <h3 class="task-title">{{ task().title }}</h3>
+      <div class="task-info">
+        <p><strong>Assigned:</strong> {{ task().assigneeId || 'N/A' }}</p>
+        <p><strong>Due:</strong> {{ task().dueDate || 'N/A' }}</p>
+      </div>
+      <div class="status-selector">
+        <label for="status-{{ task().id }}"><strong>Status:</strong></label>
+        <select 
+          [id]="'status-' + task().id" 
+          [value]="task().status" 
+          (change)="onStatusChange($event)"
+          [disabled]="isUpdatingStatus()"
+          class="status-dropdown">
+          @for (status of statusOptions; track status) {
+            <option [value]="status">{{ statusLabels[status] }}</option>
+          }
+        </select>
+      </div>
+    } @else {
+      <div class="edit-form">
+        <input [ngModel]="editModel().title" (ngModelChange)="updateEditField('title', $event)" class="edit-input title" />
+        <input type="number" [ngModel]="editModel().assigneeId" (ngModelChange)="updateEditField('assigneeId', +$event)" class="edit-input" placeholder="Assignee ID" />
+        <input type="date" [ngModel]="editModel().dueDate" (ngModelChange)="updateEditField('dueDate', $event)" class="edit-input" />
+      </div>
+    }
+  </div>
+
+  <hr class="card-line" />
+
+  <div class="card-actions">
+    @if (!isEditing()) {
+      <button class="btn" (click)="toggleEdit()">✏ Edit</button>
+    } @else {
+      <button class="btn save-btn" (click)="save()">💾 Save</button>
+      <button class="btn cancel-btn" (click)="cancel()">✖</button>
+    }
+    <button class="btn delete-btn" (click)="delete.emit(task().id)">🗑 Delete</button>
+   <button class="btn" (click)="comments.emit(task().id)">💬 Comments</button>
+  </div>
+</div>

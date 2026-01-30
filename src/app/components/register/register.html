@@ -1,0 +1,47 @@
+<div class="register-wrapper">
+  <div class="register-card">
+    <h2>יצירת חשבון חדש</h2>
+    <p class="subtitle">הצטרפי אלינו והתחילי לנהל את המשימות שלך</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+      <div class="form-group">
+        <label for="name">שם מלא</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name" 
+          placeholder="הכניסי את שמך"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">אימייל</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="your@email.com"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">סיסמה</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="לפחות 6 תווים"
+        >
+      </div>
+
+      <button type="submit" class="register-btn" [disabled]="registerForm.invalid">
+        הרשמה
+      </button>
+
+      <div class="footer-links">
+        <span>כבר יש לך חשבון?</span>
+        <a routerLink="/login">התחברי כאן</a>
+      </div>
+    </form>
+  </div>
+</div>
